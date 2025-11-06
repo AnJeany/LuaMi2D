@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,6 +10,9 @@ public class PlayerMovement1 : MonoBehaviour
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
+    [SerializeField] private float acceleration = 10f;
+    [SerializeField] private float deceleration = 15f;
+    private Vector2 currentVelocity;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpTime = 5f;
@@ -37,9 +40,32 @@ public class PlayerMovement1 : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDashing)
+            return;
+
         if (!isDashing)
         {
-            rb.linearVelocity = moveInput * moveSpeed;
+            Vector2 targetVelocity = moveInput * moveSpeed;
+
+            // Nếu đang có input → tăng tốc
+            if (moveInput.magnitude > 0.1f)
+            {
+                currentVelocity = Vector2.MoveTowards(
+                    currentVelocity,
+                    targetVelocity,
+                    acceleration * Time.fixedDeltaTime
+                );
+            }
+            else // Nếu thả phím → giảm tốc dần về 0
+            {
+                currentVelocity = Vector2.MoveTowards(
+                    currentVelocity,
+                    Vector2.zero,
+                    deceleration * Time.fixedDeltaTime
+                );
+            }
+
+            rb.linearVelocity = currentVelocity;
         }
     }
 
@@ -89,10 +115,30 @@ public class PlayerMovement1 : MonoBehaviour
         isDashing = true;
 
         Vector2 dashDirection = moveInput.normalized;
-        rb.linearVelocity = dashDirection * dashSpeed;
+        float elapsed = 0f;
 
-        yield return new WaitForSeconds(dashDuration);
+        // Giai đoạn 1: Lướt nhanh
+        while (elapsed < dashDuration)
+        {
+            rb.linearVelocity = dashDirection * dashSpeed;
+            elapsed += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
 
+        // Giai đoạn 2: Giảm tốc dần
+        while (rb.linearVelocity.magnitude > 0.1f)
+        {
+            rb.linearVelocity = Vector2.MoveTowards(
+                rb.linearVelocity,
+                Vector2.zero,
+                dashSpeed * 5f * Time.fixedDeltaTime // 5f = hệ số giảm tốc, bạn có thể chỉnh
+            );
+            yield return new WaitForFixedUpdate();
+        }
+
+        rb.linearVelocity = Vector2.zero;
+
+        // reset trạng thái
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
@@ -109,4 +155,5 @@ public class PlayerMovement1 : MonoBehaviour
         canJump = true;
         spriteRenderer.enabled = true;
     }
+
 }
