@@ -47,7 +47,7 @@ public class PlayerMovement1 : MonoBehaviour
         {
             Vector2 targetVelocity = moveInput * moveSpeed;
 
-            // Nếu đang có input → tăng tốc
+            //Nếu đang có input → tăng tốc
             if (moveInput.magnitude > 0.1f)
             {
                 currentVelocity = Vector2.MoveTowards(
@@ -125,19 +125,15 @@ public class PlayerMovement1 : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        // Giai đoạn 2: Giảm tốc dần
+        //Giai đoạn 2: Giảm tốc dần
         while (rb.linearVelocity.magnitude > 0.1f)
         {
-            rb.linearVelocity = Vector2.MoveTowards(
-                rb.linearVelocity,
-                Vector2.zero,
-                dashSpeed * 5f * Time.fixedDeltaTime // 5f = hệ số giảm tốc, bạn có thể chỉnh
-            );
+            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, 2f);
             yield return new WaitForFixedUpdate();
         }
 
         rb.linearVelocity = Vector2.zero;
-
+        
         // reset trạng thái
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
