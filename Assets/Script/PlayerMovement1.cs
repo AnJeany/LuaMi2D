@@ -27,6 +27,8 @@ public class PlayerMovement1 : MonoBehaviour
     private bool isDashing = false;
     private bool canDash = true;
 
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,7 +37,7 @@ public class PlayerMovement1 : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -133,7 +135,7 @@ public class PlayerMovement1 : MonoBehaviour
         }
 
         rb.linearVelocity = Vector2.zero;
-        
+
         // reset trạng thái
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
@@ -145,11 +147,21 @@ public class PlayerMovement1 : MonoBehaviour
         canJump = false;
         isJumping = true;
         spriteRenderer.enabled = false;
-        
+
         yield return new WaitForSeconds(jumpTime);
         isJumping = false;
         canJump = true;
         spriteRenderer.enabled = true;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Kiểm tra xem object có script SkinChanger không
+        SkinChanger skinChanger = collision.GetComponent<SkinChanger>();
+        if (skinChanger != null)
+        {
+            // Đổi sprite của player
+            spriteRenderer.sprite = skinChanger.skinSprite;
+        }
+    }
 }
