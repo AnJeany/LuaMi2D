@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
@@ -5,11 +6,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement1 : MonoBehaviour
-{
+{   private PlayerMovement1 playerMovement;
+
     [Header("Movement Settings")]
     public float dashSpeed = 15f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
+    
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpTime = 5f;
@@ -74,6 +77,25 @@ public class PlayerMovement1 : MonoBehaviour
         {
             StartCoroutine(DashCoroutine());
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!playerMovement || !other.CompareTag("NPC")) return;
+        if (!playerMovement.IsDashing()) return;
+
+        Vector2 fromDir = (transform.position - other.transform.position).normalized;
+
+        NPCBehaviour npc = other.GetComponent<NPCBehaviour>();
+        if (npc != null)
+        {
+            npc.OnPlayerDashHit(fromDir);
+        }
+    }
+
+    private bool IsDashing()
+    {
+        return isDashing;
     }
 
     public void Jump(InputAction.CallbackContext context)
