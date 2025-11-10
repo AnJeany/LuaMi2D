@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - NPC
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -12,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - NPC
-  - Player
+  - 
+  - 
   - 
   - 
   - 
@@ -41,9 +40,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: NPC
-    uniqueID: 919614479
     locked: 0
   m_RenderingLayers:
   - Default
