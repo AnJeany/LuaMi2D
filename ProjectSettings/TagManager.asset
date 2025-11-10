@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -40,6 +41,27 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1320214899
+    locked: 0
+  - name: WalkInfront
+    uniqueID: 136418231
+    locked: 0
+  - name: Collision
+    uniqueID: 2676479067
+    locked: 0
+  - name: Player
+    uniqueID: 1462648677
+    locked: 0
+  - name: NPC
+    uniqueID: 3294023379
+    locked: 0
+  - name: WalkBehind
+    uniqueID: 3007918405
+    locked: 0
+  - name: Decor
+    uniqueID: 1972692869
     locked: 0
   m_RenderingLayers:
   - Default
