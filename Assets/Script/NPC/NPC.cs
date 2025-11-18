@@ -30,10 +30,12 @@ public class NPC : MonoBehaviour, IInteractable
             
         if(isDialogueActive)
         {
+            
             NextLine();
         }
         else
         {
+            Debug.Log("da noi chuyen");
             StartDialogue();
         }
 
