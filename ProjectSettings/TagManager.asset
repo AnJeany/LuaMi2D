@@ -43,25 +43,22 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Ground
-    uniqueID: 1320214899
+    uniqueID: 1047859901
     locked: 0
-  - name: WalkInfront
-    uniqueID: 136418231
+  - name: Walkinfront
+    uniqueID: 1863287755
     locked: 0
-  - name: Collision
-    uniqueID: 2676479067
+  - name: Coliision
+    uniqueID: 1924172133
     locked: 0
   - name: Player
-    uniqueID: 1462648677
-    locked: 0
-  - name: NPC
-    uniqueID: 3294023379
+    uniqueID: 3016982479
     locked: 0
   - name: WalkBehind
-    uniqueID: 3007918405
+    uniqueID: 281977401
     locked: 0
   - name: Decor
-    uniqueID: 1972692869
+    uniqueID: 2912688011
     locked: 0
   m_RenderingLayers:
   - Default

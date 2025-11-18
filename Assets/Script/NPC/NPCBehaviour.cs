@@ -36,6 +36,7 @@ public class NPCBehaviour : MonoBehaviour
         {
             // Hiệu ứng nhỏ trước khi biến mất (tuỳ chọn)
             Destroy(gameObject);
+            
         }
     }
 }

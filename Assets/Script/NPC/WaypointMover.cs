@@ -26,14 +26,14 @@ public class WaypointMover : MonoBehaviour
     void Update()
     {
 
-
+        
         MoveToWayPoint();
     }
 
     void MoveToWayPoint()
     {
         Transform target = waypoints[currentWaypointIndex];
-
+        
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         if (!isWaiting && Vector2.Distance(transform.position, target.position) < 0.1f )
         {
