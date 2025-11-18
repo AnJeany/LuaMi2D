@@ -7,7 +7,7 @@ public class FinishPoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             // Gọi hàm hoàn thành cấp độ từ GameManager
-           SceneController.Instance.NextLevel();
+          // SceneController.Instance.NextLevel();
         }
     }
 }

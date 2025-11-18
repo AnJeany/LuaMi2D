@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Field.unity
     guid: fddf48f69c7e57240b619cc6cb25bece
   - enabled: 1
+    path: Assets/Scenes/Factory.unity
+    guid: 86526445826eaea40a64b50ede4635f6
+  - enabled: 1
+    path: Assets/Scenes/SuperMarket.unity
+    guid: d37d01bdcc03a7a4fa38d52f9b6a00da
+  - enabled: 1
     path: Assets/Scenes/b.unity
     guid: 42ae89725c6f4334fa90cf474140bbf7
   - enabled: 1
