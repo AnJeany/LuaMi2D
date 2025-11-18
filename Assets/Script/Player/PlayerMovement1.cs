@@ -37,6 +37,7 @@ public class PlayerMovement1 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -110,6 +111,13 @@ public class PlayerMovement1 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        SkinChanger skinChanger = other.GetComponent<SkinChanger>();
+        if (skinChanger != null)
+        {
+            // Đổi sprite của player
+            spriteRenderer.sprite = skinChanger.skinSprite;
+        }
+
         if (!playerMovement || !other.CompareTag("NPC")) return;
         if (!playerMovement.IsDashing()) return;
 
@@ -121,12 +129,7 @@ public class PlayerMovement1 : MonoBehaviour
             npc.OnPlayerDashHit(fromDir);
         }
 
-        SkinChanger skinChanger = other.GetComponent<SkinChanger>();
-        if (skinChanger != null)
-        {
-            // Đổi sprite của player
-            spriteRenderer.sprite = skinChanger.skinSprite;
-        }
+        
     }
 
     private bool IsDashing()
