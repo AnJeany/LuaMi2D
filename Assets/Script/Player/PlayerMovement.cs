@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement1 : MonoBehaviour
-{   private PlayerMovement1 playerMovement;
+public class PlayerMovement : MonoBehaviour
+{   private PlayerMovement playerMovement;
 
     [Header("Movement Settings")]
     public float dashSpeed = 15f;
@@ -30,6 +31,8 @@ public class PlayerMovement1 : MonoBehaviour
     public PlayerInput playerInput;
     private bool isDashing = false;
     private bool canDash = true;
+    private Vector2 conveyorForce = Vector2.zero;
+    //private List<ConveyorBelt> conveyors = new List<ConveyorBelt>();
 
 
 
@@ -72,7 +75,7 @@ public class PlayerMovement1 : MonoBehaviour
                 );
             }
 
-            rb.linearVelocity = currentVelocity;
+            rb.linearVelocity = currentVelocity + conveyorForce;
         }
     }
 
@@ -128,9 +131,17 @@ public class PlayerMovement1 : MonoBehaviour
         {
             npc.OnPlayerDashHit(fromDir);
         }
-
-        
+      
     }
+
+    //private void OnTriggerExit2D(Collider2D other)
+    //{
+    //    ConveyorBelt conveyor = other.GetComponent<ConveyorBelt>();
+    //    if (conveyor != null)
+    //    {
+    //        conveyors.Remove(conveyor);
+    //    }
+    //}
 
     private bool IsDashing()
     {
@@ -185,6 +196,16 @@ public class PlayerMovement1 : MonoBehaviour
         isJumping = false;
         canJump = true;
         spriteRenderer.enabled = true;
+    }
+
+    public void SetConveyor(Vector2 force)
+    {
+        conveyorForce = force;
+    }
+
+    public void ClearConveyor()
+    {
+        conveyorForce = Vector2.zero;
     }
 
 }
