@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb3d4d5e2a687d4f8e477b797a2218c, type: 3}
+  m_Name: Ball
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStateData
+  state: 1
+  stateName: Ball
+  sprite: {fileID: -2413806693520163455, guid: ee3ea6785ee186b49b764288e40fb8b3, type: 3}
+  animationTrigger: 
+  moveSpeed: 7.92
+  dashCooldown: 1
+  hitboxSize: {x: 1, y: 1}
+  colliderOffsetY: 0

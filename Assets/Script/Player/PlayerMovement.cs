@@ -32,7 +32,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     private bool canDash = true;
     private Vector2 conveyorForce = Vector2.zero;
-    //private List<ConveyorBelt> conveyors = new List<ConveyorBelt>();
+    private BoxCollider2D boxCollider;
+
+
+
+
 
 
 
@@ -41,6 +45,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
+ 
+        currentVelocity = Vector2.zero;
+
     }
 
     private void Update()
@@ -112,27 +120,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        SkinChanger skinChanger = other.GetComponent<SkinChanger>();
-        if (skinChanger != null)
-        {
-            // Đổi sprite của player
-            spriteRenderer.sprite = skinChanger.skinSprite;
-        }
-
-        if (!playerMovement || !other.CompareTag("NPC")) return;
-        if (!playerMovement.IsDashing()) return;
-
-        Vector2 fromDir = (transform.position - other.transform.position).normalized;
-
-        NPCBehaviour npc = other.GetComponent<NPCBehaviour>();
-        if (npc != null)
-        {
-            npc.OnPlayerDashHit(fromDir);
-        }
-      
-    }
+   
 
     //private void OnTriggerExit2D(Collider2D other)
     //{
@@ -207,8 +195,16 @@ public class PlayerMovement : MonoBehaviour
     {
         conveyorForce = Vector2.zero;
     }
+    public void SetMoveSpeed(float newSpeed)
+    {
+        if (newSpeed > 0)
+        {
+            moveSpeed = newSpeed;
+        }
+        else
+        {
+            Debug.Log("Toc do phai duong");
+        }
+    }
 
 }
-
-
-   
